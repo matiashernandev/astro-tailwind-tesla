@@ -1,0 +1,55 @@
+<section
+  class="landing-section bg-black h-screen w-screen text-center overflow-hidden relative"
+  data-header-color="black"
+>
+  <div class="z-30 relative h-full flex flex-col">
+    <header id="landing-header">
+      <h2 class="text-current pt-40 text-[40px] font-medium">Model Y</h2>
+      <p class="text-black text-sm">Concertar una prueba de conducción</p>
+    </header>
+    <footer class="flex flex-grow justify-end flex-col pb-20">
+      <div class="flex justify-center gap-3">
+        <a
+          class="border-[3px] border-gray-600 bg-gray-600 text-sm rounded font-medium text-white px-12 py-2 inline-block transition-colors hover:border-gray-500 hover:bg-gray-500"
+          href="#"
+        >
+          Explorar inventario</a
+        >
+        <a
+          class="bg-white text-sm rounded font-medium px-12 py-2 transition-colors hover:bg-black hover:text-white inline-flex justify-center items-center text-black"
+          href="#"
+        >
+          Pedido personalizado</a
+        >
+      </div>
+    </footer>
+  </div>
+
+  <div class="absolute top-0 bottom-0 h-full w-full z-10">
+    <img src="/model-y.avif" alt="" />
+  </div>
+</section>
+
+<script>
+  const headerEl = document.querySelector("#landing-header") as HTMLElement;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px", // en cuanto se vea el elemento
+    threshold: 0.9, // porcentaje de visibilidad
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const { isIntersecting } = entry;
+      if (isIntersecting) {
+        const color = entry.target.getAttribute("data-header-color");
+        headerEl.style.color = color;
+      }
+    });
+  }, observerOptions);
+
+  const sectionElements = document.querySelectorAll(".landing-section");
+  sectionElements.forEach((section) => observer.observe(section));
+  console.log(headerEl);
+</script>
