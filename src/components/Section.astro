@@ -1,5 +1,5 @@
 ---
-const { color, title, subtitle, id } = Astro.props;
+const { color, title, subtitle, id, isMoves, notUnderline } = Astro.props;
 const textColor = `text-${color}`;
 ---
 
@@ -10,16 +10,31 @@ const textColor = `text-${color}`;
 >
   <div class="z-30 relative h-full flex flex-col">
     <header>
-      <h2 class={`${textColor} pt-40 text-[40px] font-medium`}>
+      <h2 class={`${textColor} pt-[107px] text-[40px] font-medium`}>
         {title}
       </h2>
-      <p class={`${textColor} text-sm`}>
+      <a
+        href="#"
+        class={`${textColor} text-sm ${
+          notUnderline || "underline underline-offset-4"
+        }`}
+      >
         {subtitle}
-      </p>
+      </a>
     </header>
 
     <footer class="flex flex-col flex-grow justify-end pb-20">
       <slot name="footer" />
+      {
+        isMoves && (
+          <a
+            href="#"
+            class="underline underline-offset-4  text-xs leading-[18px] absolute bottom-4 self-center "
+          >
+            Disponible con Moves III
+          </a>
+        )
+      }
     </footer>
   </div>
 
